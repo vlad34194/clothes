@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:big="http://www.w3.org/1999/XSL/Transform" lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
+    <meta name="generator" content="Jekyll v3.8.5">
+    <title>Clothes</title>
+    <meta content="6"/>
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+          integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <style>
+      .bd-placeholder-img {
+        font-size: 1.125rem;
+        text-anchor: middle;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+
+      }
+      @media (min-width: 700px) {
+        .bd-placeholder-img-lg {
+          font-size: 3.5rem;
+        }
+      }
+      div{
+      margin-top: 10px;
+
+      }
+    </style>
+</head>
+<body>
+<div th:replace="header :: myHeader"></div>
+<main role="main">
+    <div class="container">
+        <div th:if="${not clothesAdd.empty}">
+            <div class="album py-5 bg-light">
+                <div class="row">
+                    <th>
+                    <td th:each="haine: ${clothesAdd}">
+                    </th>
+                    <div class="col-md-4 d-flex">
+                        <div class="card mb-4 shadow-sm flex-fill">
+                            <a th:href="@{/clothes/{id}/view(id=${haine.id})}">
+                                <img class="bd-placeholder-img card-img-top"
+                                     th:src="@{'data:image/png;base
+                                     64,'+${haine.image}}" width="70%" height="225"
+                                     xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice"/>
+                            </a>
+                            <a th:href="@{/clothes/{id}/view(id=${haine.id})}">
+                                <h5 class="card-title" th:text="${haine.title}"></h5>
+                            </a>
+                            <small class="text-muted" th:text="${haine.price}"></small>
+                            <div style="display:none">
+                                <h6 class="card-subtitle mb-2 text-muted" th:text="${haine.dateCreated}"></h6>
+                            </div>
+                            <strong th:text="${haine.description}"/>
+                        </div>
+                    </div>
+                </div>
+
+                <h2 th:if="${clothesAdd.empty}">No clothes in the database, click <a th:href="@{/clothes}">here</a> to
+                    try again</h2>
+            </div>
+        </div>
+    </div>
+</main>
+</div>
+</body>
+</html>
